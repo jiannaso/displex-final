@@ -17,7 +17,7 @@ init();
 let gui = new GUI();
 
 const torus = new THREE.Mesh(
-  new THREE.TorusGeometry(1, 0.3, 100, 100),
+  new THREE.SphereGeometry(1, 100, 100),
   new THREE.ShaderMaterial({
     vertexShader,
     fragmentShader,
@@ -55,12 +55,18 @@ composer.addPass(bloomPass);
 
 const clock = new THREE.Clock();
 
+// var sphere_geometry = new THREE.SphereGeometry(1, 10, 10);
+// var material = new THREE.MeshBasicMaterial();
+// var sphere = new THREE.Mesh(sphere_geometry, material);
+// scene.add(sphere);
+
 let animate = () => {
   const elapsedTime = clock.getElapsedTime();
   torus.material.uniforms.uTime.value = elapsedTime;
   torus.rotation.z = Math.sin(elapsedTime) / 4 + elapsedTime / 20 + 5;
   composer.render();
   controls.update();
+  // torus.x = x + 0.1;
   requestAnimationFrame(animate);
 };
 animate();
